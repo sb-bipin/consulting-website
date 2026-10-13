@@ -1,0 +1,195 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum JobStatus {
+  DRAFT
+  ACTIVE
+  CLOSED
+}
+
+enum ApplicationStatus {
+  NEW
+  REVIEWING
+  SHORTLISTED
+  REJECTED
+  SELECTED
+}
+
+enum InquiryType {
+  CONTACT
+  HIRE
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Country {
+  id            String   @id @default(cuid())
+  nameEn        String
+  nameNe        String
+  slug          String   @unique
+  flag          String?
+  descriptionEn String?  @db.Text
+  descriptionNe String?  @db.Text
+  imageUrl      String?
+  isActive      Boolean  @default(true)
+  order         Int      @default(0)
+  jobs          Job[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Category {
+  id            String   @id @default(cuid())
+  nameEn        String
+  nameNe        String
+  slug          String   @unique
+  icon          String?
+  descriptionEn String?  @db.Text
+  descriptionNe String?  @db.Text
+  isActive      Boolean  @default(true)
+  order         Int      @default(0)
+  jobs          Job[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Job {
+  id               String    @id @default(cuid())
+  slug             String    @unique
+  titleEn          String
+  titleNe          String
+  descriptionEn    String    @db.Text
+  descriptionNe    String    @db.Text
+  requirementsEn   String?   @db.Text
+  requirementsNe   String?   @db.Text
+  benefitsEn       String?   @db.Text
+  benefitsNe       String?   @db.Text
+  company          String?
+  countryId        String
+  categoryId       String
+  country          Country   @relation(fields: [countryId], references: [id])
+  category         Category  @relation(fields: [categoryId], references: [id])
+  salaryMin        Int?
+  salaryMax        Int?
+  currency         String    @default("NPR")
+  vacancies        Int       @default(1)
+  workingHours     String?
+  contractDuration String?
+  accommodation    Boolean   @default(false)
+  food             Boolean   @default(false)
+  overtime         Boolean   @default(false)
+  deadline         DateTime?
+  interviewDate    DateTime?
+  imageUrl         String?
+  status           JobStatus @default(ACTIVE)
+  isFeatured       Boolean   @default(false)
+  views            Int       @default(0)
+  applications     Application[]
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@index([status, isFeatured])
+}
+
+model Application {
+  id          String            @id @default(cuid())
+  jobId       String?
+  job         Job?              @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  fullName    String
+  email       String
+  phone       String
+  address     String?
+  dob         DateTime?
+  gender      String?
+  nationality String?
+  passportNo  String?
+  experience  String?           @db.Text
+  coverLetter String?           @db.Text
+  resumeUrl   String?
+  status      ApplicationStatus @default(NEW)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([status])
+}
+
+model Inquiry {
+  id        String      @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String      @db.Text
+  type      InquiryType @default(CONTACT)
+  isRead    Boolean     @default(false)
+  createdAt DateTime    @default(now())
+}
+
+model Service {
+  id            String   @id @default(cuid())
+  titleEn       String
+  titleNe       String
+  descriptionEn String   @db.Text
+  descriptionNe String   @db.Text
+  icon          String?
+  order         Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  position  String?
+  message   String   @db.Text
+  imageUrl  String?
+  rating    Int      @default(5)
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Faq {
+  id         String   @id @default(cuid())
+  questionEn String
+  questionNe String
+  answerEn   String   @db.Text
+  answerNe   String   @db.Text
+  order      Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+}
+
+model Notice {
+  id          String   @id @default(cuid())
+  titleEn     String
+  titleNe     String
+  bodyEn      String   @db.Text
+  bodyNe      String   @db.Text
+  isActive    Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
