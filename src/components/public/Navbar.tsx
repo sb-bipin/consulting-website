@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
+import HeaderHeightSync from "@/components/HeaderHeightSync";
 
 type Props = {
   settings: Record<string, string>;
@@ -33,6 +34,7 @@ export default function Navbar({ settings }: Props) {
 
   return (
     <header className="sticky-top">
+      <HeaderHeightSync />
       <div className="topbar d-none d-lg-block py-2">
         <div className="container d-flex flex-wrap justify-content-between align-items-center gap-2">
           <div className="d-flex flex-wrap gap-3">

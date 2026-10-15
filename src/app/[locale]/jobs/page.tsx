@@ -88,7 +88,7 @@ export default async function JobsPage({
           <div className="row g-4">
             {/* Filters */}
             <div className="col-lg-3">
-              <div className="sw-card p-4 sticky-lg-top" style={{ top: "100px" }}>
+              <div className="sw-card p-4 sw-side-panel">
                 <h5 className="mb-3">
                   <i className="bi bi-funnel-fill text-accent me-2" />
                   {tc("filters")}

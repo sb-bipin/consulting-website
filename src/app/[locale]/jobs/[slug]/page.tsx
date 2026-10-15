@@ -172,7 +172,7 @@ export default async function JobDetailPage({
 
             {/* Apply sidebar */}
             <div className="col-lg-4">
-              <div className="sw-card p-4 sticky-lg-top mb-4" style={{ top: "100px" }}>
+              <div className="sw-card p-4 sw-side-panel mb-4">
                 <h5 className="mb-3">{t("applyTitle")}</h5>
 
                 <Link

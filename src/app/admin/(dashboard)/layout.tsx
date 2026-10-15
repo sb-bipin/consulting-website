@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import { logout } from "@/actions/auth";
 import AdminSidebar from "@/components/admin/AdminSidebar";
+import HeaderHeightSync from "@/components/HeaderHeightSync";
 
 export const dynamic = "force-dynamic";
 
@@ -33,6 +34,7 @@ export default async function AdminLayout({
       </div>
 
       <div className="flex-grow-1 bg-soft d-flex flex-column min-w-0">
+        <HeaderHeightSync selector="header.sticky-top" />
         <header className="bg-white border-bottom px-3 px-lg-4 py-3 d-flex justify-content-between align-items-center sticky-top">
           <div className="d-flex align-items-center gap-3">
             <button

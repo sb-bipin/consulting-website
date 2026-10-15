@@ -304,6 +304,32 @@ a {
   transform: translateY(-6px);
   box-shadow: var(--sw-shadow);
 }
+/* Cards stacked in the same column must size to their own content,
+   not stretch to the (possibly taller) flex-column height. */
+.sw-card:not(:only-child) {
+  height: auto;
+}
+
+/* Sticky side panel (filters, edit forms) that sits below the header */
+.sw-side-panel {
+  height: auto;
+  position: sticky;
+  top: calc(var(--sw-header-h, 90px) + 1rem);
+  max-height: calc(100vh - var(--sw-header-h, 90px) - 2rem);
+  overflow-y: auto;
+  align-self: flex-start;
+}
+.sw-side-panel:hover {
+  transform: none;
+  box-shadow: var(--sw-shadow-sm);
+}
+@media (max-width: 991.98px) {
+  .sw-side-panel {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+}
 .job-card .job-card-top {
   padding: 1.25rem 1.25rem 0;
 }

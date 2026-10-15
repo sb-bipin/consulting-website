@@ -26,7 +26,7 @@ export default async function AdminNoticesPage({
       <h1 className="h3 mb-4">Notices & Announcements</h1>
       <div className="row g-4">
         <div className="col-lg-5">
-          <div className="sw-card p-3 p-lg-4 sticky-lg-top" style={{ top: "100px" }}>
+          <div className="sw-card p-3 p-lg-4 sw-side-panel">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="mb-0">{edit ? "Edit Notice" : "Add Notice"}</h5>
               {edit && (
