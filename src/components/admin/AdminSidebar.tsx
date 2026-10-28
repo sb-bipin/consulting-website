@@ -11,6 +11,7 @@ const items = [
   { href: "/admin/applications", label: "Applications", icon: "bi-file-earmark-person-fill" },
   { href: "/admin/inquiries", label: "Inquiries", icon: "bi-chat-left-dots-fill" },
   { href: "/admin/services", label: "Services", icon: "bi-grid-1x2-fill" },
+  { href: "/admin/team", label: "Team Members", icon: "bi-people-fill" },
   { href: "/admin/testimonials", label: "Testimonials", icon: "bi-chat-quote-fill" },
   { href: "/admin/faqs", label: "FAQs", icon: "bi-question-circle-fill" },
   { href: "/admin/notices", label: "Notices", icon: "bi-megaphone-fill" },

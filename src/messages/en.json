@@ -217,7 +217,7 @@
     "email": "Email Address",
     "phone": "Phone Number",
     "address": "Current Address",
-    "dob": "Date of Birth",
+    "dob": "Date of Birth (AD)",
     "gender": "Gender",
     "male": "Male",
     "female": "Female",

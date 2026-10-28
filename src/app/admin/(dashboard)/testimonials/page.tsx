@@ -33,9 +33,9 @@ export default async function AdminTestimonialsPage({
             </div>
             <form action={saveTestimonial} className="row g-3">
               {edit && <input type="hidden" name="id" value={edit.id} />}
-              <div className="col-12">
-                <label className="form-label">Name *</label>
-                <input name="name" className="form-control" defaultValue={edit?.name} required />
+              <div className="col-12" style={{ display: "none" }}>
+                <label className="form-label">Image URL</label>
+                <input name="imageUrl" className="form-control" defaultValue={edit?.imageUrl ?? ""} />
               </div>
               <div className="col-12">
                 <label className="form-label">Position / Country</label>

@@ -203,6 +203,34 @@ export async function deleteTestimonial(formData: FormData) {
   revalidatePath("/admin/testimonials");
 }
 
+/* ---------------- TEAM MEMBERS ---------------- */
+
+export async function saveTeamMember(formData: FormData) {
+  await requireAdmin();
+  const id = s(formData, "id");
+  const data = {
+    name: s(formData, "name"),
+    designation: s(formData, "designation"),
+    contact: s(formData, "contact"),
+    email: s(formData, "email") || null,
+    imageUrl: s(formData, "imageUrl") || null,
+    order: num(formData, "order") ?? 0,
+    isActive: bool(formData, "isActive"),
+  };
+  if (id) await prisma.teamMember.update({ where: { id }, data });
+  else await prisma.teamMember.create({ data });
+  revalidatePath("/admin/team");
+  revalidatePath("/about");
+}
+
+export async function deleteTeamMember(formData: FormData) {
+  await requireAdmin();
+  const id = s(formData, "id");
+  if (id) await prisma.teamMember.delete({ where: { id } });
+  revalidatePath("/admin/team");
+  revalidatePath("/about");
+}
+
 /* ---------------- FAQS ---------------- */
 
 export async function saveFaq(formData: FormData) {

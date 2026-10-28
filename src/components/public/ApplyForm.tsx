@@ -19,9 +19,13 @@ export default function ApplyForm({
 
   const errorText = (code?: string) => {
     if (code === "INVALID_FILE_TYPE")
-      return "Invalid file type. Please upload PDF, DOC or DOCX.";
+      return "Invalid file type. Please upload JPG, JPEG, PNG, WebP, AVIF, GIF, PDF, DOC or DOCX.";
     if (code === "FILE_TOO_LARGE")
       return "File is too large. Maximum allowed size is 5MB.";
+    if (code === "PASSPORT_REQUIRED")
+      return "Passport number is required.";
+    if (code === "PASSPORT_IMAGE_REQUIRED")
+      return "Passport image/PDF is required.";
     return t("error");
   };
 
@@ -96,8 +100,10 @@ export default function ApplyForm({
           />
         </div>
         <div className="col-md-4">
-          <label className="form-label">{t("passportNo")}</label>
-          <input name="passportNo" className="form-control" />
+          <label className="form-label">
+            {t("passportNo")} <span className="text-danger">*</span>
+          </label>
+          <input name="passportNo" className="form-control" required />
         </div>
         <div className="col-12">
           <label className="form-label">{t("address")}</label>
@@ -122,14 +128,17 @@ export default function ApplyForm({
           />
         </div>
         <div className="col-12">
-          <label className="form-label">{t("resume")}</label>
+          <label className="form-label">
+            Passport Image / Document <span className="text-danger">*</span>
+          </label>
           <input
             name="resume"
             type="file"
             className="form-control"
-            accept=".pdf,.doc,.docx"
+            accept="image/jpeg,image/jpg,image/png,image/webp,image/avif,image/gif,.pdf,.doc,.docx"
+            required
           />
-          <div className="form-text">{t("resumeHint")}</div>
+          <div className="form-text">Upload passport copy as image (JPG, PNG, WebP, AVIF, GIF) or PDF/DOC/DOCX (max 5MB)</div>
         </div>
         <div className="col-12">
           <button

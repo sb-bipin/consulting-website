@@ -66,8 +66,8 @@ export default function JobForm({
         <label className="form-label">Title (Nepali)</label>
         <input name="titleNe" className="form-control" defaultValue={job?.titleNe} />
       </div>
-      <div className="col-md-4">
-        <label className="form-label">Slug</label>
+      <div className="col-md-3">
+        <label className="form-label">Short Name</label>
         <input
           name="slug"
           className="form-control"
@@ -75,16 +75,16 @@ export default function JobForm({
           placeholder="auto-generated if empty"
         />
       </div>
-      <div className="col-md-4">
+      <div className="col-md-3">
         <label className="form-label">Company</label>
         <input name="company" className="form-control" defaultValue={job?.company ?? ""} />
       </div>
-      <div className="col-md-4">
+      <div className="col-md-3" style={{ display: "none" }}>
         <label className="form-label">Image URL</label>
         <input name="imageUrl" className="form-control" defaultValue={job?.imageUrl ?? ""} />
       </div>
 
-      <div className="col-md-6">
+      <div className="col-md-3">
         <label className="form-label">
           Country <span className="text-danger">*</span>
         </label>
@@ -102,7 +102,7 @@ export default function JobForm({
           ))}
         </select>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-3">
         <label className="form-label">
           Category <span className="text-danger">*</span>
         </label>
@@ -139,7 +139,7 @@ export default function JobForm({
           defaultValue={job?.salaryMax ?? ""}
         />
       </div>
-      <div className="col-md-2">
+      <div className="col-md-3">
         <label className="form-label">Currency</label>
         <input
           name="currency"
@@ -147,7 +147,7 @@ export default function JobForm({
           defaultValue={job?.currency ?? "NPR"}
         />
       </div>
-      <div className="col-md-2">
+      <div className="col-md-3">
         <label className="form-label">Vacancies</label>
         <input
           name="vacancies"
@@ -156,7 +156,7 @@ export default function JobForm({
           defaultValue={job?.vacancies ?? 1}
         />
       </div>
-      <div className="col-md-2">
+      <div className="col-md-3">
         <label className="form-label">Status</label>
         <select
           name="status"
@@ -186,7 +186,7 @@ export default function JobForm({
         />
       </div>
       <div className="col-md-3">
-        <label className="form-label">Deadline</label>
+        <label className="form-label">Deadline (AD)</label>
         <input
           name="deadline"
           type="date"
@@ -195,7 +195,7 @@ export default function JobForm({
         />
       </div>
       <div className="col-md-3">
-        <label className="form-label">Interview Date</label>
+        <label className="form-label">Interview Date (AD)</label>
         <input
           name="interviewDate"
           type="date"

@@ -22,6 +22,12 @@ async function saveResume(file: File): Promise<string | null> {
     "application/pdf",
     "application/msword",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+    "image/avif",
+    "image/gif",
   ];
   if (!allowed.includes(file.type)) {
     throw new Error("INVALID_FILE_TYPE");
@@ -68,8 +74,12 @@ export async function submitApplication(
   const fullName = str(formData, "fullName");
   const email = str(formData, "email");
   const phone = str(formData, "phone");
+  const passportNo = str(formData, "passportNo");
   if (!fullName || !email || !phone) {
     return { ok: false, message: "MISSING_FIELDS" };
+  }
+  if (!passportNo) {
+    return { ok: false, message: "PASSPORT_REQUIRED" };
   }
 
   const jobSlug = str(formData, "jobSlug");
@@ -85,11 +95,13 @@ export async function submitApplication(
   const dobRaw = str(formData, "dob");
   const resumeFile = formData.get("resume");
 
+  if (!(resumeFile instanceof File) || resumeFile.size === 0) {
+    return { ok: false, message: "PASSPORT_IMAGE_REQUIRED" };
+  }
+
   let resumeUrl: string | null = null;
   try {
-    if (resumeFile instanceof File) {
-      resumeUrl = await saveResume(resumeFile);
-    }
+    resumeUrl = await saveResume(resumeFile);
   } catch (e) {
     const code = e instanceof Error ? e.message : "UPLOAD_FAILED";
     return { ok: false, message: code };
@@ -105,7 +117,7 @@ export async function submitApplication(
       dob: dobRaw ? new Date(dobRaw) : null,
       gender: str(formData, "gender") || null,
       nationality: str(formData, "nationality") || null,
-      passportNo: str(formData, "passportNo") || null,
+      passportNo,
       experience: str(formData, "experience") || null,
       coverLetter: str(formData, "coverLetter") || null,
       resumeUrl,

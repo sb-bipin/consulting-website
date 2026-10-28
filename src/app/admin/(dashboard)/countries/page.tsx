@@ -48,9 +48,9 @@ export default async function AdminCountriesPage({
                 <label className="form-label">Name (Nepali)</label>
                 <input name="nameNe" className="form-control" defaultValue={edit?.nameNe} />
               </div>
-              <div className="col-12">
-                <label className="form-label">Slug</label>
-                <input name="slug" className="form-control" defaultValue={edit?.slug} />
+              <div className="col-12" style={{ display: "none" }}>
+                <label className="form-label">Image URL</label>
+                <input name="imageUrl" className="form-control" defaultValue={edit?.imageUrl ?? ""} />
               </div>
               <div className="col-12">
                 <label className="form-label">Description (English)</label>

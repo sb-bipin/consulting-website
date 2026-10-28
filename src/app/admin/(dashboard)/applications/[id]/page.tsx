@@ -22,7 +22,7 @@ export default async function ApplicationDetailPage({
     { label: "Email", value: app.email },
     { label: "Phone", value: app.phone },
     { label: "Address", value: app.address },
-    { label: "Date of Birth", value: app.dob ? formatDate(app.dob) : null },
+    { label: "Date of Birth (AD)", value: app.dob ? formatDate(app.dob) : null },
     { label: "Gender", value: app.gender },
     { label: "Nationality", value: app.nationality },
     { label: "Passport No.", value: app.passportNo },
